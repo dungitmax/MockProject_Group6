@@ -1,10 +1,11 @@
 package group6.fga.fsoft.com.mockproject_group6.model;
 
-import com.tunganh.finalmockproject.model.entity.Lesson;
-import com.tunganh.finalmockproject.model.entity.TimetableCell;
 
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+
+import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
+import group6.fga.fsoft.com.mockproject_group6.model.entity.TimetableCell;
 
 /**
  * Created by TungAnh on 4/16/18.

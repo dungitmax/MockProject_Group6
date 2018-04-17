@@ -5,10 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.tunganh.finalmockproject.model.Contract;
-import com.tunganh.finalmockproject.model.entity.TimetableCell;
-
 import java.util.ArrayList;
+
+import group6.fga.fsoft.com.mockproject_group6.model.Contract;
+import group6.fga.fsoft.com.mockproject_group6.model.entity.TimetableCell;
 
 
 public class TimeTableAdapter {

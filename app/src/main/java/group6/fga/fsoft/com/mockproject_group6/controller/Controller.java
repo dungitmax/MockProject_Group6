@@ -3,8 +3,9 @@ package group6.fga.fsoft.com.mockproject_group6.controller;
 import android.os.Handler;
 import android.os.Message;
 
-import com.tunganh.finalmockproject.DBHeper.DBManager;
-import com.tunganh.finalmockproject.MainActivity;
+
+import group6.fga.fsoft.com.mockproject_group6.DBManager;
+import group6.fga.fsoft.com.mockproject_group6.MainActivity;
 
 public class Controller {
     public static final String TAG = Controller.class.getName();

@@ -5,7 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.tunganh.finalmockproject.model.Contract;
+
+import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 
 public class DBManager extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "database.db";
