@@ -9,7 +9,7 @@ public class Contract implements BaseColumns {
 
     public static final String TABLE_TIME = "TimeTable";
     public static final String TIME_ID = "id";
-    public static final String TIME_ROW = "row";
-    public static final String TIME_COLUMN = "column";
-    public static final String TIME_LESSONID = "lessonID";
+    public static final String TIME_WEEK = "week";
+    public static final String TIME_LESSON = "lesson";
+    public static final String TIME_POSITION = "position";
 }

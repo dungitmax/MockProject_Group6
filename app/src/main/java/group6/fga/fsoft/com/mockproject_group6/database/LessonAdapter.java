@@ -1,10 +1,9 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 
 
 import group6.fga.fsoft.com.mockproject_group6.model.Contract;

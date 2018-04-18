@@ -1,10 +1,9 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 
 import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 
@@ -34,9 +33,9 @@ public class DBManager extends SQLiteOpenHelper {
         CREATE_TIMETABLE = "CREATE TABLE "
                 + Contract.TABLE_TIME + "("
                 + Contract.TIME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + Contract.TIME_ROW + "INTEGER NOT NULL, "
-                + Contract.TIME_COLUMN + "INTEGER NOT NULL, "
-                + Contract.TIME_LESSONID + "INTEGER NOT NULL" + ")";
+                + Contract.TIME_WEEK + "INTEGER NOT NULL, "
+                + Contract.TIME_LESSON + "TEXT NOT NULL, "
+                + Contract.TIME_POSITION + "INTEGER NOT NULL" + ")";
         sqLiteDatabase.execSQL(CREATE_TIMETABLE);
     }
 

@@ -7,31 +7,6 @@ import android.os.Parcelable;
  * Created by TungAnh on 4/16/18.
  */
 public class Lesson implements Parcelable {
-    private int mId;
-    private String mName;
-
-    public Lesson(int id, String name) {
-        mId = id;
-        mName = name;
-    }
-
-    public static Creator<Lesson> getCREATOR() {
-        return CREATOR;
-    }
-
-    protected Lesson(Parcel in) {
-        mId = in.readInt();
-        mName = in.readString();
-    }
-
-    @Override
-    public String toString() {
-        return "Lesson{" +
-            "mId=" + mId +
-            ", mName='" + mName + '\'' +
-            '}';
-    }
-
     public static final Creator<Lesson> CREATOR = new Creator<Lesson>() {
         @Override
         public Lesson createFromParcel(Parcel in) {
@@ -43,6 +18,34 @@ public class Lesson implements Parcelable {
             return new Lesson[size];
         }
     };
+    private int mId;
+    private String mName;
+
+    public Lesson(String mName) {
+        this.mName = mName;
+    }
+
+    public Lesson(int id, String name) {
+        mId = id;
+        mName = name;
+    }
+
+    protected Lesson(Parcel in) {
+        mId = in.readInt();
+        mName = in.readString();
+    }
+
+    public static Creator<Lesson> getCREATOR() {
+        return CREATOR;
+    }
+
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "mId=" + mId +
+                ", mName='" + mName + '\'' +
+                '}';
+    }
 
     public int getId() {
         return mId;

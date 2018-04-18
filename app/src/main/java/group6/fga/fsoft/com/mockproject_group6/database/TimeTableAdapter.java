@@ -1,4 +1,4 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,11 +21,11 @@ public class TimeTableAdapter {
     }
 
     // Add
-    public void addTimeTable(int row, int column, int lessonID) {
+    public void addTimeTable(String lessonName, int week, int position) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.TIME_ROW, row);
-        contentValues.put(Contract.TIME_COLUMN, column);
-        contentValues.put(Contract.TIME_LESSONID, lessonID);
+        contentValues.put(Contract.TIME_LESSON, lessonName);
+        contentValues.put(Contract.TIME_WEEK, week);
+        contentValues.put(Contract.TIME_POSITION, position);
         mSqLiteDatabase.insert(Contract.TABLE_TIME, null, contentValues);
     }
 
@@ -33,10 +33,10 @@ public class TimeTableAdapter {
     public boolean updateTimeTable(ArrayList<TimetableCell> timeTableArrayList) {
         mSqLiteDatabase.delete(Contract.TABLE_TIME, null, null);
         for (TimetableCell timeTable : timeTableArrayList) {
-            int row = timeTable.getRow();
-            int column = timeTable.getCol();
-            int lesson_id = timeTable.getLessonID();
-            addTimeTable(row, column, lesson_id);
+            String lessonName = timeTable.getmLessonName();
+            int week = timeTable.getmWeek();
+            int position = timeTable.getmPosition();
+            addTimeTable(lessonName, week, position);
         }
         return true;
     }

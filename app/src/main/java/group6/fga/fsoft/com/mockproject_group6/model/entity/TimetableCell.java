@@ -6,55 +6,55 @@ package group6.fga.fsoft.com.mockproject_group6.model.entity;
 public class TimetableCell {
     private int mLessonID;
     private String mLessonName;
-    private int mCol;
-    private int mRow;
+    private int mWeek;
+    private int mPosition;
 
-    public TimetableCell(int lessonID, String lessonName, int col, int row) {
-        mLessonID = lessonID;
-        mLessonName = lessonName;
-        mCol = col;
-        mRow = row;
+    public TimetableCell(int mLessonID, String mLessonName, int mWeek, int mPosition) {
+        this.mLessonID = mLessonID;
+        this.mLessonName = mLessonName;
+        this.mWeek = mWeek;
+        this.mPosition = mPosition;
     }
 
-    public int getLessonID() {
+    public int getmLessonID() {
         return mLessonID;
     }
 
-    public void setLessonID(int lessonID) {
-        mLessonID = lessonID;
+    public void setmLessonID(int mLessonID) {
+        this.mLessonID = mLessonID;
     }
 
-    public String getLessonName() {
+    public String getmLessonName() {
         return mLessonName;
     }
 
-    public void setLessonName(String lessonName) {
-        mLessonName = lessonName;
+    public void setmLessonName(String mLessonName) {
+        this.mLessonName = mLessonName;
     }
 
-    public int getCol() {
-        return mCol;
+    public int getmWeek() {
+        return mWeek;
     }
 
-    public void setCol(int col) {
-        mCol = col;
+    public void setmWeek(int mWeek) {
+        this.mWeek = mWeek;
     }
 
-    public int getRow() {
-        return mRow;
+    public int getmPosition() {
+        return mPosition;
     }
 
-    public void setRow(int row) {
-        mRow = row;
+    public void setmPosition(int mPosition) {
+        this.mPosition = mPosition;
     }
 
     @Override
     public String toString() {
         return "TimetableCell{" +
-            "mLessonID=" + mLessonID +
-            ", mLessonName='" + mLessonName + '\'' +
-            ", mCol=" + mCol +
-            ", mRow=" + mRow +
-            '}';
+                "mLessonID=" + mLessonID +
+                ", mLessonName='" + mLessonName + '\'' +
+                ", mWeek=" + mWeek +
+                ", mPosition=" + mPosition +
+                '}';
     }
 }

@@ -4,8 +4,8 @@ import android.os.Handler;
 import android.os.Message;
 
 
-import group6.fga.fsoft.com.mockproject_group6.DBManager;
 import group6.fga.fsoft.com.mockproject_group6.MainActivity;
+import group6.fga.fsoft.com.mockproject_group6.database.DBManager;
 
 public class Controller {
     public static final String TAG = Controller.class.getName();
