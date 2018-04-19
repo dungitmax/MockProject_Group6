@@ -5,62 +5,100 @@ import android.os.Message;
 import android.util.SparseArray;
 
 import group6.fga.fsoft.com.mockproject_group6.MainActivity;
-import group6.fga.fsoft.com.mockproject_group6.database.DBManager;
 
 public class Controller {
-    public static final int STATE_LOAD_DATA = 0;
-    public static final int STATE_SAVE_DATA = 1;
-    public static final int STATE_DROP = 2;
-    public static final int STATE_UPDATE_LESSON = 3;
-    private static BaseState mCurrentState;
-    private static SparseArray<BaseState> mStates;
-    private MsgHandler mHandler;
-    private MainActivity mMain;
+    public static final String TAG = Controller.class.getName();
+    public static final int DROP_STATE = 1;
+    public static final int LOAD_DATA_STATE = 2;
+    public static final int SAVE_DATA_STATE = 3;
 
-    private DBManager mDBHelper;
+    public static final int EDIT_LESSON_NAME_STATE = 5;
+    public static final int ADD_LESSON_NAME_TO_LIST_STATE = 6;
 
+    private MsgHandler mMsgHandler;
+    private MainActivity mMainActivity;
 
-    public Controller(MainActivity main) {
-        mMain = main;
-        mHandler = new MsgHandler();
-        mDBHelper = new DBManager(mMain);
-        initStates();
+    private SparseArray<BaseState> mStates;
+    private BaseState currentState;
+
+//    private DBManager dbManager;
+//    DBManager getDBManager() {
+//        return dbManager;
+//    }
+
+    public Controller(MainActivity mMainActivity) {
+        this.mMainActivity = mMainActivity;
+        mMsgHandler = new MsgHandler(this);
+        mStates = initState();
     }
 
-    private static void transitionToState(int stateKey) {
-        mCurrentState = mStates.get(stateKey);
+    public void sendMessage(Message msg) {
+
+        mMsgHandler.sendMessage(msg);
     }
 
-    private static void handleMsg(Message msg) {
-        int state = msg.what;
-        transitionToState(state);
-        mCurrentState.handleMsg(msg);
+    private void handleMsg(Message msg) {
+
+        switch (msg.what){
+            case DROP_STATE:
+                currentState = mStates.get(DROP_STATE);
+
+                break;
+            case LOAD_DATA_STATE:
+                currentState = mStates.get(LOAD_DATA_STATE);
+
+                break;
+            case SAVE_DATA_STATE:
+                currentState = mStates.get(SAVE_DATA_STATE);
+
+                break;
+
+            case EDIT_LESSON_NAME_STATE:
+                currentState = mStates.get(EDIT_LESSON_NAME_STATE);
+
+                break;
+            case ADD_LESSON_NAME_TO_LIST_STATE:
+                currentState = mStates.get(ADD_LESSON_NAME_TO_LIST_STATE);
+
+                break;
+
+        }
+
+        currentState.handleMsg(msg);
+
     }
 
-    private void initStates() {
-        mStates = new SparseArray<>();
-//        mStates.put(STATE_LOAD_DATA, new LoadDataState(this));
-//        mStates.put(STATE_SAVE_DATA, new SaveDataState(this));
-//        mStates.put(STATE_DROP, new DropState(this));
-//        mStates.put(STATE_UPDATE_LESSON, new UpdateLessonState(this));
+    private SparseArray<BaseState> initState(){
+        SparseArray<BaseState> states = new SparseArray<>();
+        states.put(DROP_STATE,new DropState(this));
+        states.put(LOAD_DATA_STATE,new LoadDataState(this));
+        states.put(SAVE_DATA_STATE,new SaveDataState(this));
+
+        states.put(EDIT_LESSON_NAME_STATE,new EditLessonNameState(this));
+        states.put(ADD_LESSON_NAME_TO_LIST_STATE,new AddLessonNameToList(this));
+
+        return states;
     }
 
-    public void sendMsg(Message msg) {
-        mHandler.sendMessage(msg);
-    }
-
-    MainActivity getMainActivity() {
-        return mMain;
-    }
-
-    DBManager getDBHelper() {
-        return mDBHelper;
+    public MainActivity getMainActivity() {
+        return mMainActivity;
     }
 
     private static class MsgHandler extends Handler {
+
+        private Controller mController;
+
+        public MsgHandler(Controller mController) {
+            super();
+            this.mController = mController;
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            handleMsg(msg);
+            mController.handleMsg(msg);
         }
     }
+
+
+
 }

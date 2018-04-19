@@ -1,6 +1,6 @@
 package group6.fga.fsoft.com.mockproject_group6.model;
 
-
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class Model {
     private ArrayList<Lesson> mLessonsList;
     private ArrayList<Timetable> mTimetableCellsList;
 
-    private boolean mEdittingLesson;
+    private boolean mEditingLesson;
     private PropertyChangeSupport mPropertyChangeSupport;
 
     public Model() {
@@ -29,12 +29,12 @@ public class Model {
     }
 
     public void setLessonsList(
-        ArrayList<Lesson> lessonsList) {
+            ArrayList<Lesson> lessonsList) {
         mLessonsList = lessonsList;
     }
 
-    public void setPropertyChangeSupport(PropertyChangeSupport propertyChangeSupport) {
-        mPropertyChangeSupport = propertyChangeSupport;
+    public void setPropertyChangeSupportListener(PropertyChangeListener listener) {
+        mPropertyChangeSupport.addPropertyChangeListener(listener);
     }
 
     public ArrayList<Timetable> getTimetableCellsList() {
@@ -42,15 +42,15 @@ public class Model {
     }
 
     public void setTimetableCellsList(
-        ArrayList<Timetable> timetableCellsList) {
+            ArrayList<Timetable> timetableCellsList) {
         mTimetableCellsList = timetableCellsList;
     }
 
-    public boolean isEdittingLesson() {
-        return mEdittingLesson;
+    public boolean isEditingLesson() {
+        return mEditingLesson;
     }
 
-    public void setEdittingLesson(boolean edittingLesson) {
-        mEdittingLesson = edittingLesson;
+    public void setEditingLesson(boolean editingLesson) {
+        mEditingLesson = editingLesson;
     }
 }
