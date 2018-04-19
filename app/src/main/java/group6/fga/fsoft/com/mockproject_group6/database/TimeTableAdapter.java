@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import group6.fga.fsoft.com.mockproject_group6.model.Contract;
-import group6.fga.fsoft.com.mockproject_group6.model.entity.TimetableCell;
+import group6.fga.fsoft.com.mockproject_group6.model.entity.Timetable;
 
 
 public class TimeTableAdapter {
@@ -30,9 +30,9 @@ public class TimeTableAdapter {
     }
 
     // Update
-    public boolean updateTimeTable(ArrayList<TimetableCell> timeTableArrayList) {
+    public boolean updateTimeTable(ArrayList<Timetable> timeTableArrayList) {
         mSqLiteDatabase.delete(Contract.TABLE_TIME, null, null);
-        for (TimetableCell timeTable : timeTableArrayList) {
+        for (Timetable timeTable : timeTableArrayList) {
             String lessonName = timeTable.getmLessonName();
             int week = timeTable.getmWeek();
             int position = timeTable.getmPosition();
@@ -50,6 +50,13 @@ public class TimeTableAdapter {
     public Cursor getTimeTable(int i) {
         String query = "SELECT * FROM " + Contract.TABLE_TIME + " WHERE " + Contract.TIME_ID + "= ?";
         Cursor cursor = mSqLiteDatabase.rawQuery(query, new String[]{i + ""});
+        return cursor;
+    }
+
+    //query week of table
+    public Cursor getTimeTableOfWeek(int week) {
+        String query = "SELECT * FROM " + Contract.TABLE_TIME + " WHERE " + Contract.TIME_WEEK + "= ?";
+        Cursor cursor = mSqLiteDatabase.rawQuery(query, new String[]{week + ""});
         return cursor;
     }
 

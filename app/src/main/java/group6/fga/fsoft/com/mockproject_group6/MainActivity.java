@@ -7,9 +7,12 @@ import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.List;
 
+import group6.fga.fsoft.com.mockproject_group6.database.DBManager;
+import group6.fga.fsoft.com.mockproject_group6.database.LessonAdapter;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG = "letandung";
 
     private GridView mGridViewTimetable;
     private GridView mGridViewLessons;
@@ -52,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
         mGridViewLessons = findViewById(R.id.grid_view_lessons);
         mGridViewTimetable.setAdapter(mGridViewAdapter);
         mGridViewLessons.setAdapter(mLessonAdapter);
+//
+        DBManager dbManager = new DBManager(this);
+        LessonAdapter mLessonAdapter = new LessonAdapter(this);
+        Lesson lesson = new Lesson("Toan");
+        mLessonAdapter.addLesson(lesson);
 
 
     }

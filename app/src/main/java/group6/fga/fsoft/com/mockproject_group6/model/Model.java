@@ -5,7 +5,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
-import group6.fga.fsoft.com.mockproject_group6.model.entity.TimetableCell;
+import group6.fga.fsoft.com.mockproject_group6.model.entity.Timetable;
 
 /**
  * Created by TungAnh on 4/16/18.
@@ -15,7 +15,7 @@ public class Model {
     public static final String UPDATE_LESSON_LIST = "UPDATE_LESSON_LIST";
 
     private ArrayList<Lesson> mLessonsList;
-    private ArrayList<TimetableCell> mTimetableCellsList;
+    private ArrayList<Timetable> mTimetableCellsList;
 
     private boolean mEdittingLesson;
     private PropertyChangeSupport mPropertyChangeSupport;
@@ -37,12 +37,12 @@ public class Model {
         mPropertyChangeSupport = propertyChangeSupport;
     }
 
-    public ArrayList<TimetableCell> getTimetableCellsList() {
+    public ArrayList<Timetable> getTimetableCellsList() {
         return mTimetableCellsList;
     }
 
     public void setTimetableCellsList(
-        ArrayList<TimetableCell> timetableCellsList) {
+        ArrayList<Timetable> timetableCellsList) {
         mTimetableCellsList = timetableCellsList;
     }
 
