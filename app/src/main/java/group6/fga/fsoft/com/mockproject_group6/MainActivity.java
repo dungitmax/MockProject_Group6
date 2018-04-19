@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private GridViewAdapter mLessonAdapter;
     private List<Object> mListTimetable;
     private List<Object> mListLesson;
-    private DatePickerDialog fromDatePickerDialog;
-    private DatePickerDialog toDatePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
