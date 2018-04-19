@@ -10,11 +10,11 @@ import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 
-public class LessonAdapter {
+public class LessonDatabase {
     SQLiteDatabase mSqLiteDatabase;
     private DBManager dbManager;
 
-    public LessonAdapter(Context c) {
+    public LessonDatabase(Context c) {
         dbManager = new DBManager(c);
         mSqLiteDatabase = dbManager.getWritableDatabase();
     }

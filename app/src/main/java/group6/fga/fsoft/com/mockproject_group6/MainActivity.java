@@ -7,13 +7,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import group6.fga.fsoft.com.mockproject_group6.adapter.GridViewAdapter;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
@@ -69,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void DisplayDatePicker() {
+
+    }
+
     private void initView() {
         ImageView r_bin = findViewById(R.id.r_bin);
         r_bin.setOnClickListener(new View.OnClickListener() {
@@ -82,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
     private void DialogEvents() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
-        TextView mTxtStartDay = mView.findViewById(R.id.txtFromDate);
-        TextView mTxtToDay = mView.findViewById(R.id.txtToDate);
+        final TextView mTxtStartDay = mView.findViewById(R.id.txtFromDate);
+        final TextView mTxtToDay = mView.findViewById(R.id.txtToDate);
         CheckBox mCheckBox = mView.findViewById(R.id.checkBox);
         if (mCheckBox.isChecked()) {
             Toast.makeText(this, "isChecked", Toast.LENGTH_SHORT).show();
@@ -94,12 +102,50 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //from date
+                final Calendar myCalendar = Calendar.getInstance();
+                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        String myFormat = "MM/dd/yy"; //In which you need put here
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                        mTxtStartDay.setText(sdf.format(myCalendar.getTime()));
+                    }
+
+                };
+                new DatePickerDialog(MainActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         mTxtToDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //to date
+                final Calendar myCalendar = Calendar.getInstance();
+                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        String myFormat = "MM/dd/yy"; //In which you need put here
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                        mTxtToDay.setText(sdf.format(myCalendar.getTime()));
+                    }
+
+                };
+                new DatePickerDialog(MainActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
             }
         });
@@ -108,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 /** xử lý đăng kí chu kì */
-                Toast.makeText(MainActivity.this, "Có", Toast.LENGTH_SHORT).show();
             }
         });
         alertDialogBuilder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -121,5 +166,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 
 }

@@ -10,11 +10,11 @@ import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Timetable;
 
 
-public class TimeTableAdapter {
+public class TimeTableDatabase {
     SQLiteDatabase mSqLiteDatabase;
     private DBManager dbManager;
 
-    public TimeTableAdapter(Context c) {
+    public TimeTableDatabase(Context c) {
         dbManager = new DBManager(c);
         mSqLiteDatabase = dbManager.getWritableDatabase();
     }
