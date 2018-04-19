@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-
 import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Timetable;
 
@@ -21,24 +19,25 @@ public class TimeTableAdapter {
     }
 
     // Add
-    public void addTimeTable(String lessonName, int week, int position) {
+    public void addTimeTable(Timetable lessonName) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.TIME_LESSON, lessonName);
-        contentValues.put(Contract.TIME_WEEK, week);
-        contentValues.put(Contract.TIME_POSITION, position);
+        contentValues.put(Contract.TIME_LESSON, lessonName.getmLessonName());
+        contentValues.put(Contract.TIME_WEEK, lessonName.getmWeek());
+        contentValues.put(Contract.TIME_POSITION, lessonName.getmPosition());
         mSqLiteDatabase.insert(Contract.TABLE_TIME, null, contentValues);
     }
 
     // Update
-    public boolean updateTimeTable(ArrayList<Timetable> timeTableArrayList) {
-        mSqLiteDatabase.delete(Contract.TABLE_TIME, null, null);
-        for (Timetable timeTable : timeTableArrayList) {
-            String lessonName = timeTable.getmLessonName();
-            int week = timeTable.getmWeek();
-            int position = timeTable.getmPosition();
-            addTimeTable(lessonName, week, position);
-        }
-        return true;
+    public void updateTimeTable(Timetable timetable, int timeTableID) {
+        ContentValues values = new ContentValues();
+        values.put(Contract.TIME_ID, timetable.getmTimeTableID());
+        values.put(Contract.TIME_LESSON, timetable.getmLessonName());
+        values.put(Contract.TIME_WEEK, timetable.getmWeek());
+        values.put(Contract.TIME_POSITION, timetable.getmPosition());
+        // updating row
+        mSqLiteDatabase.update(Contract.TABLE_TIME, values, Contract.TIME_ID + " = ?",
+                new String[]{String.valueOf(timeTableID)});
+
     }
 
     // Delete

@@ -4,24 +4,29 @@ package group6.fga.fsoft.com.mockproject_group6.model.entity;
  * Created by TungAnh on 4/16/18.
  */
 public class Timetable {
-    private int mLessonID;
+    private int mTimeTableID;
     private String mLessonName;
     private int mWeek;
     private int mPosition;
 
-    public Timetable(int mLessonID, String mLessonName, int mWeek, int mPosition) {
-        this.mLessonID = mLessonID;
+    public Timetable(int mTimeTableID, String mLessonName, int mWeek, int mPosition) {
+        this.mTimeTableID = mTimeTableID;
+        this.mLessonName = mLessonName;
+        this.mWeek = mWeek;
+        this.mPosition = mPosition;
+    }
+    public Timetable( String mLessonName, int mWeek, int mPosition) {
         this.mLessonName = mLessonName;
         this.mWeek = mWeek;
         this.mPosition = mPosition;
     }
 
-    public int getmLessonID() {
-        return mLessonID;
+    public int getmTimeTableID() {
+        return mTimeTableID;
     }
 
-    public void setmLessonID(int mLessonID) {
-        this.mLessonID = mLessonID;
+    public void setmTimeTableID(int mTimeTableID) {
+        this.mTimeTableID = mTimeTableID;
     }
 
     public String getmLessonName() {
@@ -51,7 +56,7 @@ public class Timetable {
     @Override
     public String toString() {
         return "Timetable{" +
-                "mLessonID=" + mLessonID +
+                "mTimeTableID=" + mTimeTableID +
                 ", mLessonName='" + mLessonName + '\'' +
                 ", mWeek=" + mWeek +
                 ", mPosition=" + mPosition +

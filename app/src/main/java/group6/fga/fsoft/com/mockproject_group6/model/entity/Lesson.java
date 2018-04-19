@@ -1,23 +1,9 @@
 package group6.fga.fsoft.com.mockproject_group6.model.entity;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by TungAnh on 4/16/18.
  */
-public class Lesson implements Parcelable {
-    public static final Creator<Lesson> CREATOR = new Creator<Lesson>() {
-        @Override
-        public Lesson createFromParcel(Parcel in) {
-            return new Lesson(in);
-        }
-
-        @Override
-        public Lesson[] newArray(int size) {
-            return new Lesson[size];
-        }
-    };
+public class Lesson {
     private int mId;
     private String mName;
 
@@ -30,47 +16,19 @@ public class Lesson implements Parcelable {
         mName = name;
     }
 
-    protected Lesson(Parcel in) {
-        mId = in.readInt();
-        mName = in.readString();
-    }
-
-    public static Creator<Lesson> getCREATOR() {
-        return CREATOR;
-    }
-
-    @Override
-    public String toString() {
-        return "Lesson{" +
-                "mId=" + mId +
-                ", mName='" + mName + '\'' +
-                '}';
-    }
-
-    public int getId() {
+    public int getmId() {
         return mId;
     }
 
-    public void setId(int id) {
-        mId = id;
+    public void setmId(int mId) {
+        this.mId = mId;
     }
 
-    public String getName() {
+    public String getmName() {
         return mName;
     }
 
-    public void setName(String name) {
-        mName = name;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mId);
-        dest.writeString(mName);
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 }

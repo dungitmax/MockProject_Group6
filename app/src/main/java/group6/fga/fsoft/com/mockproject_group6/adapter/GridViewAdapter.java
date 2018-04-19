@@ -1,4 +1,4 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import group6.fga.fsoft.com.mockproject_group6.R;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 /**
@@ -79,7 +80,7 @@ public class GridViewAdapter extends BaseAdapter {
         switch (getItemViewType(i)) {
             case LESSON_ITEM:
                 Lesson lesson = (Lesson) mList.get(i);
-                holder.textView.setText(lesson.getName());
+                holder.textView.setText(lesson.getmName());
                 holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {

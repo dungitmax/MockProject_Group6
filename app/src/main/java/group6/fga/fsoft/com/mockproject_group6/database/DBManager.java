@@ -26,16 +26,16 @@ public class DBManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         CREATE_LESSONTABLE = "CREATE TABLE "
-                + Contract.TABLE_LESSON + "("
+                + Contract.TABLE_LESSON + " ("
                 + Contract.LESSON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + Contract.LESSON_NAME + "TEXT NOT NULL" + ")";
+                + Contract.LESSON_NAME + " TEXT NOT NULL " + ")";
         sqLiteDatabase.execSQL(CREATE_LESSONTABLE);
         CREATE_TIMETABLE = "CREATE TABLE "
                 + Contract.TABLE_TIME + "("
                 + Contract.TIME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + Contract.TIME_WEEK + "INTEGER NOT NULL, "
-                + Contract.TIME_LESSON + "TEXT NOT NULL, "
-                + Contract.TIME_POSITION + "INTEGER NOT NULL" + ")";
+                + Contract.TIME_WEEK + " INTEGER NOT NULL, "
+                + Contract.TIME_LESSON + " TEXT NOT NULL, "
+                + Contract.TIME_POSITION + " INTEGER NOT NULL " + ")";
         sqLiteDatabase.execSQL(CREATE_TIMETABLE);
     }
 
