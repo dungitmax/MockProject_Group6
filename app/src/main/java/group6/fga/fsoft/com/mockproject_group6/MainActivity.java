@@ -7,8 +7,9 @@ import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.List;
 
+import group6.fga.fsoft.com.mockproject_group6.adapter.GridViewAdapter;
 import group6.fga.fsoft.com.mockproject_group6.database.DBManager;
-import group6.fga.fsoft.com.mockproject_group6.database.LessonAdapter;
+import group6.fga.fsoft.com.mockproject_group6.adapter.LessonAdapter;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 public class MainActivity extends AppCompatActivity {

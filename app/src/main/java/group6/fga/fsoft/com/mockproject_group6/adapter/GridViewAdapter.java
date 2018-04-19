@@ -1,4 +1,4 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import group6.fga.fsoft.com.mockproject_group6.R;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 /**

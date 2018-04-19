@@ -1,4 +1,4 @@
-package group6.fga.fsoft.com.mockproject_group6.database;
+package group6.fga.fsoft.com.mockproject_group6.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import group6.fga.fsoft.com.mockproject_group6.database.DBManager;
 import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Timetable;
 
