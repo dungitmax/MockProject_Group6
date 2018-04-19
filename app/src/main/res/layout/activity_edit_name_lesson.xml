@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border"
             android:padding="15dp"
-            android:text="Hoa học" />
+            android:text="" />
     </LinearLayout>
 
     <LinearLayout
