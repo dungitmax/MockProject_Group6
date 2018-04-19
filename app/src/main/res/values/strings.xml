@@ -46,13 +46,15 @@
         <item>@string/lesson_5</item>
         <item>@string/lesson_6</item>
     </string-array>
-    <string name="speech_prompt">Say something</string>
     <string name="speech_not_supported">Sorry! device not support.</string>
     <string name="lesson_existed_warning">Lesson name existed!</string>
     <string name="lesson_empty_warning">Lesson name can\'t be blank!</string>
     <string name="add_lesson_name">Add lesson name</string>
     <string name="list_of_lesson_name">List of lesson name</string>
     <string name="_16_21_04_2018">16 - 21/04/2018</string>
+    <string name="enter_lesson_name">Input Lesson Name</string>
+    <string name="Add">Add</string>
+    <string name="speech_prompt">Say something</string>
     <string-array name="array_lesson_names">
         <item>Math</item>
         <item>Literature</item>
