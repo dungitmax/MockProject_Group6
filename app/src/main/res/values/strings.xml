@@ -46,7 +46,8 @@
         <item>@string/lesson_5</item>
         <item>@string/lesson_6</item>
     </string-array>
-
+    <string name="speech_prompt">Say something</string>
+    <string name="speech_not_supported">Sorry! device not support.</string>
     <string name="lesson_existed_warning">Lesson name existed!</string>
     <string name="lesson_empty_warning">Lesson name can\'t be blank!</string>
     <string name="add_lesson_name">Add lesson name</string>

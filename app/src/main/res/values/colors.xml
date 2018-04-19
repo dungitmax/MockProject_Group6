@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff4081</color>
+    <color name="black">#000000</color>
 
     <color name="timetable_header_text">#ffffff</color>
     <color name="timetable_header_text_disabled">#8b8b8b</color>
