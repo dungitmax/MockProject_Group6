@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 DialogEvents();
             }
         });
+
     }
 
     private void DialogEvents() {
@@ -120,6 +123,22 @@ public class MainActivity extends AppCompatActivity {
         alertDialogBuilder.setView(mView);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private void DialogAddLesson(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.custom_dialog_add_lesson,null);
+        TextView textView = view.findViewById(R.id.tvAddLesson);
+        EditText editAddLesson  = view.findViewById(R.id.edit_addLessonName);
+        Button btnAdd = view.findViewById(R.id.btnAdd);
+        Button btnCancel  = view.findViewById(R.id.btnCancel);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 }
