@@ -1,5 +1,6 @@
 package group6.fga.fsoft.com.mockproject_group6.adapter;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.util.Log;
 import android.view.DragEvent;
@@ -30,6 +31,15 @@ public class GridViewAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private int mGridType;
 
+    private OnCellDroppedListener mListener;
+
+    public interface OnCellDroppedListener {
+        void onCellDrop(int startPosition, int fromTable, int dropPosition, int toTable);
+    }
+
+    public void setOnCellDroppedListener(OnCellDroppedListener listener) {
+        mListener = listener;
+    }
 
     public GridViewAdapter(Context context, List<Object> mList, int mGridType) {
         this.mList = mList;
@@ -81,24 +91,29 @@ public class GridViewAdapter extends BaseAdapter {
             case LESSON_ITEM:
                 Lesson lesson = (Lesson) mList.get(i);
                 holder.textView.setText(lesson.getmName());
-                holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
-                        Log.e("startPosition", String.valueOf(i));
-                        Log.e("fromTable", mGridType == 2 ? "GRID_LESSON" : "GRID_TIMETABLE");
-                        // Construct draggable shadow for view
+                if (!lesson.getmName().equals("")) {
+                    holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+//                        Log.e("startPosition", String.valueOf(i));
+//                        Log.e("fromTable", mGridType == 2 ? "GRID_LESSON" : "GRID_TIMETABLE");
 
-                        View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-                        // Start the drag of the shadow
-                        view.startDrag(null, shadowBuilder, view, 0);
-                        // Hide the actual view as shadow is being dragged
-                        LinearLayout ll = (LinearLayout) view;
-                        TextView tv = (TextView) ll.getChildAt(0);
-                        tv.setVisibility(View.INVISIBLE);
+                            String text = i + " " + mGridType;
+                            ClipData data = ClipData.newPlainText("text", text);
+
+                            // Construct draggable shadow for view
+                            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                            // Start the drag of the shadow
+                            view.startDrag(data, shadowBuilder, view, 0);
+                            // Hide the actual view as shadow is being dragged
 //                        view.setVisibility(View.INVISIBLE);
-                        return true;
-                    }
-                });
+
+                            ((LinearLayout) view).getChildAt(0).setVisibility(View.INVISIBLE);
+
+                            return true;
+                        }
+                    });
+                }
 
                 holder.linearLayout.setOnDragListener(new View.OnDragListener() {
 //                    // Drawable for when the draggable enters the drop target
@@ -110,6 +125,7 @@ public class GridViewAdapter extends BaseAdapter {
                     public boolean onDrag(View v, DragEvent event) {
                         // Get the dragged view being dropped over a target view
                         final View draggedView = (View) event.getLocalState();
+
                         switch (event.getAction()) {
                             case DragEvent.ACTION_DRAG_STARTED:
                                 // Signals the start of a drag and drop operation.
@@ -126,15 +142,6 @@ public class GridViewAdapter extends BaseAdapter {
 //                                v.setBackground(defaultBackground);
                                 break;
                             case DragEvent.ACTION_DROP:
-//                                // Signals to a View that the user has released the drag shadow,
-//                                // and the drag point is within the bounding box of the View.
-//                                // Get View dragged item is being dropped on
-//                                View dropTarget = v;
-//                                // Make desired changes to the drop target below
-//                                dropTarget.setTag("dropped");
-//                                // Get owner of the dragged view and remove the view (if needed)
-//                                ViewGroup owner = (ViewGroup) draggedView.getParent();
-//                                owner.removeView(draggedView);
 
                                 if (mGridType == GRID_LESSON) {
                                     Log.e("dropPosition", String.valueOf(i));
@@ -144,27 +151,36 @@ public class GridViewAdapter extends BaseAdapter {
                                     Log.e("toTable", "GRID_TIMETABLE");
                                 }
 
+                                ClipData clipData = event.getClipData();
+                                String text = clipData.getItemAt(0).getText().toString();
+                                String[] arrayText = text.split(" ");
+                                int startPosition = Integer.parseInt(arrayText[0]);
+                                int fromTable = Integer.parseInt(arrayText[1]);
+
+                                Log.e("startPosition", String.valueOf(startPosition));
+                                Log.e("fromTable", fromTable == 2 ? "GRID_LESSON" : "GRID_TIMETABLE");
+
+                                if (mListener != null) {
+                                    mListener.onCellDrop(startPosition, fromTable, i, mGridType);
+                                }
+
                                 break;
                             case DragEvent.ACTION_DRAG_ENDED:
                                 // Signals to a View that the drag and drop operation has concluded.
                                 // If event result is set, this means the dragged view was dropped in target
                                 if (event.getResult()) { // drop succeeded
 //                                    v.setBackground(enteredZoneBackground);
+
                                 } else { // drop did not occur
                                     // restore the view as visible
-                                    draggedView.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-//                                            draggedView.setVisibility(View.VISIBLE);
 
-                                            LinearLayout ll = (LinearLayout) draggedView;
-                                            TextView tv = (TextView) ll.getChildAt(0);
-                                            tv.setVisibility(View.VISIBLE);
-                                        }
-                                    });
                                     // restore drop zone default background
 //                                    v.setBackground(defaultBackground);
                                 }
+
+                                // Tam thoi hien lai view drag
+                                ((LinearLayout) draggedView).getChildAt(0).
+                                        setVisibility(View.VISIBLE);
                             default:
                                 break;
                         }
@@ -180,7 +196,6 @@ public class GridViewAdapter extends BaseAdapter {
 
         return view;
     }
-
 
     static class ViewHolder {
         TextView textView;
