@@ -1,5 +1,6 @@
 package group6.fga.fsoft.com.mockproject_group6;
 
+import android.app.DatePickerDialog;
 import android.content.ClipData;
 import android.os.Bundle;
 import android.os.Message;
@@ -8,13 +9,18 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import group6.fga.fsoft.com.mockproject_group6.adapter.GridViewAdapter;
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mButtonAddLessonName;
     private Button mButtonOk;
     private Button mButtonCancel;
+    private TextView mTextViewDate;
     private ImageView mRecycleBin;
 
     private GridView mGridViewTimetable;
@@ -66,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRecycleBin = findViewById(R.id.r_bin);
         mGridViewTimetable = findViewById(R.id.grid_view_timetable);
         mGridViewLessons = findViewById(R.id.grid_view_lessons);
+        mTextViewDate = findViewById(R.id.text_view_date);
 
         //******************Fake Data
 
@@ -108,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mButtonEditLessonName.setOnClickListener(this);
         mButtonPrevious.setOnClickListener(this);
         mButtonNext.setOnClickListener(this);
+        mTextViewDate.setOnClickListener(this);
 
         mRecycleBin.setOnDragListener(new View.OnDragListener() {
             @Override
@@ -255,7 +264,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 msg.what = Controller.LOAD_DATA_STATE;
                 // set msg.arg1 : currentWorkingWeek
                 mController.sendMessage(msg);
+                break;
+            case R.id.text_view_date:
+                /**Xu ly Tuan:*/
+                final Calendar myCalendar = Calendar.getInstance();
+                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        int weekNumber = myCalendar.get(Calendar.WEEK_OF_YEAR);
+//                        mTextViewDate.setText(weekNumber + "");
+                        myCalendar.set(Calendar.WEEK_OF_YEAR, weekNumber);
+                        myCalendar.setFirstDayOfWeek(Calendar.MONDAY);
+                        myCalendar.set(Calendar.DAY_OF_WEEK, myCalendar.getFirstDayOfWeek());
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                        Date date1 = myCalendar.getTime();
+                        String firstOfWeek = simpleDateFormat.format(date1.getTime());
+                        myCalendar.add(Calendar.DATE, 5);//cong 5 ngay de den thu 7
+                        Date date = myCalendar.getTime();
+                        String endOfWeek = simpleDateFormat.format(date);
+
+                        mTextViewDate.setText(firstOfWeek.toString() + " - " + endOfWeek.toString());
+                    }
+
+
+                };
+                new DatePickerDialog(mController.getMainActivity(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 break;
 
         }

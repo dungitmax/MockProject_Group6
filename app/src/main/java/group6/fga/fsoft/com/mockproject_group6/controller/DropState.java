@@ -53,8 +53,10 @@ public class DropState extends BaseState {
         final TextView mTxtToDay = mView.findViewById(R.id.txtToDate);
         CheckBox mCheckBox = mView.findViewById(R.id.checkBox);
         if (mCheckBox.isChecked()) {
+            /**Xử lý check ở đây nhé*/
 
         } else {
+            /** ẩn textView To ngày*/
 
         }
         mTxtStartDay.setOnClickListener(new View.OnClickListener() {
