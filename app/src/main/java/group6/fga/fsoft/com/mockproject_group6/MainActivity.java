@@ -20,6 +20,7 @@ import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private GridView mGridViewTimetable;
     private GridView mGridViewLessons;
-    private GridViewAdapter mGridViewAdapter;
+    private GridViewAdapter mTimetableAdapter;
     private GridViewAdapter mLessonAdapter;
     private List<Object> mListTimetable;
     private List<Object> mListLesson;
@@ -102,10 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mListTimetable.set(15, new Lesson(""));
         mListTimetable.set(22, new Lesson(""));
 
-        mGridViewAdapter = new GridViewAdapter(this, mListTimetable, GridViewAdapter.GRID_TIMETABLE);
+        mTimetableAdapter = new GridViewAdapter(this, mListTimetable, GridViewAdapter.GRID_TIMETABLE);
         mLessonAdapter = new GridViewAdapter(this, mListLesson, GridViewAdapter.GRID_LESSON);
 
-        mGridViewTimetable.setAdapter(mGridViewAdapter);
+        mGridViewTimetable.setAdapter(mTimetableAdapter);
         mGridViewLessons.setAdapter(mLessonAdapter);
     }
 
@@ -124,14 +125,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (event.getAction()) {
                     case DragEvent.ACTION_DRAG_ENTERED:
+                        v.animate().scaleX(1.5f).scaleY(1.5f).start();
 
                         break;
+
                     case DragEvent.ACTION_DRAG_EXITED:
 
+                        v.animate().scaleX(1).scaleY(1).start();
                         break;
-                    case DragEvent.ACTION_DRAG_ENDED:
 
-                        break;
                     case DragEvent.ACTION_DROP:
 
                         ClipData clipData = event.getClipData();
@@ -149,12 +151,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         mController.sendMessage(msg);
                         break;
+
+                    case DragEvent.ACTION_DRAG_ENDED:
+
+                        break;
                 }
                 return true;
             }
         });
 
-        mGridViewAdapter.setOnCellDroppedListener(new GridViewAdapter.OnCellDroppedListener() {
+        mTimetableAdapter.setOnCellDroppedListener(new GridViewAdapter.OnCellDroppedListener() {
             @Override
             public void onCellDrop(int startPosition, int fromTable, int dropPosition, int toTable) {
 
@@ -166,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Message msg = new Message();
                         msg.what = Controller.DROP_STATE;
                         msg.arg1 = DropState.REPLACE_LESSON;
+                        msg.arg2 = DropState.FROM_LESSONS_TO_TIMETABLE;
                         mController.sendMessage(msg);
 
                     } else if (dropLesson.getmName().equals("")) {
@@ -179,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Message msg = new Message();
                         msg.what = Controller.DROP_STATE;
                         msg.arg1 = DropState.REPLACE_LESSON;
+                        msg.arg2 = DropState.FROM_TIMETABLE_TO_TIMETABLE;
                         mController.sendMessage(msg);
                     }
                 }
@@ -205,10 +213,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void onUpdateModel(PropertyChangeEvent event) {
         switch (event.getPropertyName()) {
             case Model.UPDATE_TIMETABLE:
-
+                mListTimetable.clear();
+                mListTimetable.addAll((Collection<?>) event.getNewValue());
+                mTimetableAdapter.notifyDataSetChanged();
                 break;
-            case Model.UPDATE_LESSON_LIST:
 
+            case Model.UPDATE_LESSON_LIST:
+                mListLesson.clear();
+                mListLesson.addAll((Collection<?>) event.getNewValue());
+                mLessonAdapter.notifyDataSetChanged();
+                break;
+
+            case Model.UPDATE_DIM_VIEW:
+                boolean isEditing = (boolean) event.getNewValue();
+                if (isEditing) {
+                    mRecycleBin.setEnabled(false);
+                    mRecycleBin.setAlpha(0.4f);
+                    mGridViewTimetable.setAlpha(0.8f);
+                    mButtonOk.setEnabled(false);
+                    mButtonCancel.setEnabled(false);
+                    mButtonNext.setEnabled(false);
+                    mButtonNext.setAlpha(0.4f);
+                    mButtonPrevious.setEnabled(false);
+                    mButtonPrevious.setAlpha(0.4f);
+                    mButtonAddLessonName.setEnabled(false);
+                    mButtonEditLessonName.setText(getResources().getString(R.string.cancel_editing));
+                    mLessonAdapter.setDraggable(false);
+                    mTimetableAdapter.setDraggable(false);
+                } else {
+                    mRecycleBin.setEnabled(true);
+                    mRecycleBin.setAlpha(1f);
+                    mGridViewTimetable.setAlpha(1f);
+                    mButtonOk.setEnabled(true);
+                    mButtonCancel.setEnabled(true);
+                    mButtonNext.setEnabled(true);
+                    mButtonNext.setAlpha(1f);
+                    mButtonPrevious.setEnabled(true);
+                    mButtonPrevious.setAlpha(1f);
+                    mButtonAddLessonName.setEnabled(true);
+                    mButtonEditLessonName.setText(getResources().getString(R.string.edit_lesson_name));
+                    mLessonAdapter.setDraggable(true);
+                    mTimetableAdapter.setDraggable(true);
+                }
                 break;
             default:
                 break;
@@ -218,6 +264,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initController() {
         mController = new Controller(this);
+    }
+
+    public Model getmModel() {
+        return mModel;
     }
 
     @Override
@@ -233,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button_edit:
                 msg = new Message();
-                msg.what = Controller.EDIT_LESSON_NAME_STATE;
+                msg.what = Controller.DIM_VIEW_STATE;
                 mController.sendMessage(msg);
 
                 break;
@@ -265,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // set msg.arg1 : currentWorkingWeek
                 mController.sendMessage(msg);
                 break;
+
             case R.id.text_view_date:
                 /**Xu ly Tuan:*/
                 final Calendar myCalendar = Calendar.getInstance();

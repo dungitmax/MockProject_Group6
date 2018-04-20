@@ -3,10 +3,14 @@ package group6.fga.fsoft.com.mockproject_group6.controller;
 import android.os.Message;
 import android.util.Log;
 
-public class UpdateLessonState extends BaseState {
-    public static final String TAG = UpdateLessonState.class.getName();
+/**
+ * Created by Tu on 19-Apr-18.
+ */
 
-    public UpdateLessonState(Controller controller) {
+class AddLessonNameToListState extends BaseState {
+    public static final String TAG = AddLessonNameToListState.class.getName();
+
+    public AddLessonNameToListState(Controller controller) {
         super(controller);
     }
 

@@ -16,7 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import group6.fga.fsoft.com.mockproject_group6.adapter.LessonDatabase;
+import group6.fga.fsoft.com.mockproject_group6.database.LessonDatabase;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 /**
@@ -65,15 +65,15 @@ public class EditLessonActivity extends AppCompatActivity implements View.OnClic
             if (name.length() == 0) {
                 Toast.makeText(this, "Name Cannot Empty!", Toast.LENGTH_SHORT).show();
             } else {
-                LessonDatabase lessonDatabase = new LessonDatabase(EditLessonActivity.this);
-                boolean result = lessonDatabase.checkName(name);
-                if (result == true) {
-                    lessonDatabase.updateLesson(mLesson.getmId(), name);
-                    Toast.makeText(this, "Name Edit Success!", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(this, "Name Already Exist", Toast.LENGTH_SHORT).show();
-                }
+//                LessonDatabase lessonDatabase = new LessonDatabase(EditLessonActivity.this);
+//                boolean result = lessonDatabase.checkName(name);
+//                if (result == true) {
+//                    lessonDatabase.updateLesson(mLesson.getmId(), name);
+//                    Toast.makeText(this, "Name Edit Success!", Toast.LENGTH_SHORT).show();
+//                    finish();
+//                } else {
+//                    Toast.makeText(this, "Name Already Exist", Toast.LENGTH_SHORT).show();
+//                }
             }
         }
         if (v.getId() == R.id.btnCancel1) {
