@@ -1,4 +1,4 @@
-package group6.fga.fsoft.com.mockproject_group6.adapter;
+package group6.fga.fsoft.com.mockproject_group6.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,10 +12,9 @@ import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 public class LessonDatabase {
     SQLiteDatabase mSqLiteDatabase;
-    private DBManager dbManager;
 
-    public LessonDatabase(Context c) {
-        dbManager = new DBManager(c);
+
+    public LessonDatabase(Context c, DBManager dbManager) {
         mSqLiteDatabase = dbManager.getWritableDatabase();
     }
 
