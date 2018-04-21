@@ -14,16 +14,16 @@ import group6.fga.fsoft.com.mockproject_group6.model.entity.Timetable;
 
 public class TimeTableDatabase {
     SQLiteDatabase mSqLiteDatabase;
-    DBManager dbManager;
+    DBManager manager;
 
     public TimeTableDatabase(Context c, DBManager dbManager) {
         mSqLiteDatabase = dbManager.getWritableDatabase();
-        dbManager = new DBManager(c);
+        manager = new DBManager(c);
     }
 
     // Add
     public void addTimeTable(Timetable timetable) {
-        mSqLiteDatabase = dbManager.getWritableDatabase();
+        mSqLiteDatabase = manager.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Contract.TIME_LESSON, timetable.getmLessonName());
         contentValues.put(Contract.TIME_WEEK, timetable.getmWeek());
@@ -35,7 +35,7 @@ public class TimeTableDatabase {
 
     // Update
     public void updateTimeTable(Timetable timetable) {
-        mSqLiteDatabase = dbManager.getWritableDatabase();
+        mSqLiteDatabase = manager.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Contract.TIME_LESSON, timetable.getmLessonName());
         values.put(Contract.TIME_WEEK, timetable.getmWeek());
@@ -48,7 +48,7 @@ public class TimeTableDatabase {
 
     // Delete TimeTable
     public void deleteTimeTable(Timetable timetable) {
-        mSqLiteDatabase = dbManager.getWritableDatabase();
+        mSqLiteDatabase = manager.getWritableDatabase();
         mSqLiteDatabase.delete(Contract.TABLE_TIME, Contract.TIME_ID + " = ?",
                 new String[]{String.valueOf(timetable.getmTimeTableID())});
         mSqLiteDatabase.close();
@@ -65,7 +65,7 @@ public class TimeTableDatabase {
     public List<Timetable> getAllTimetable() {
         List<Timetable> listTimeTable = new ArrayList<>();
         String queryTable = " SELECT * FROM " + Contract.TABLE_LESSON;
-        mSqLiteDatabase = dbManager.getWritableDatabase();
+        mSqLiteDatabase = manager.getWritableDatabase();
         Cursor cursor = mSqLiteDatabase.rawQuery(queryTable, null);
 
         if (cursor.moveToFirst()) {
@@ -97,7 +97,7 @@ public class TimeTableDatabase {
     public List<Timetable> getTimeTableByWeek(int week, int year) {
         List<Timetable> listTimeTableByWeek = new ArrayList<>();
         String query = "SELECT * FROM " + Contract.TABLE_TIME + " WHERE " + Contract.TIME_WEEK + "= ?" + " AND " + Contract.TIME_YEAR + "= ?";
-        mSqLiteDatabase = dbManager.getWritableDatabase();
+        mSqLiteDatabase = manager.getWritableDatabase();
         Cursor cursor = mSqLiteDatabase.rawQuery(query, new String[]{week + "", year + ""});
 
         if (cursor.moveToFirst()) {
