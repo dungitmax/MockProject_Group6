@@ -11,5 +11,6 @@ public class Contract implements BaseColumns {
     public static final String TIME_ID = "id";
     public static final String TIME_WEEK = "week";
     public static final String TIME_LESSON = "lesson";
+    public static final String TIME_YEAR = "year";
     public static final String TIME_POSITION = "position";
 }

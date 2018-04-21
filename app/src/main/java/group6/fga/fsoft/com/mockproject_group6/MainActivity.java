@@ -242,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 msg.what = Controller.LOAD_DATA_STATE;
                 // set msg.arg1 : nextWeek
                 mController.sendMessage(msg);
-
                 break;
 
             case R.id.button_previous:
@@ -287,7 +286,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         myCalendar.add(Calendar.DATE, 5);//cong 5 ngay de den thu 7
                         Date date = myCalendar.getTime();
                         String endOfWeek = simpleDateFormat.format(date);
-
                         mTextViewDate.setText(firstOfWeek.toString() + " - " + endOfWeek.toString());
                     }
 

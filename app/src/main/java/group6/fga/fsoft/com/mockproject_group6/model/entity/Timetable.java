@@ -7,17 +7,18 @@ public class Timetable {
     private int mTimeTableID;
     private String mLessonName;
     private int mWeek;
+    private int mYear;
     private int mPosition;
 
-    public Timetable(int mTimeTableID, String mLessonName, int mWeek, int mPosition) {
+    public Timetable() {
+
+    }
+
+    public Timetable(int mTimeTableID, String mLessonName, int mWeek, int mYear, int mPosition) {
         this.mTimeTableID = mTimeTableID;
         this.mLessonName = mLessonName;
         this.mWeek = mWeek;
-        this.mPosition = mPosition;
-    }
-    public Timetable( String mLessonName, int mWeek, int mPosition) {
-        this.mLessonName = mLessonName;
-        this.mWeek = mWeek;
+        this.mYear = mYear;
         this.mPosition = mPosition;
     }
 
@@ -45,21 +46,19 @@ public class Timetable {
         this.mWeek = mWeek;
     }
 
+    public int getmYear() {
+        return mYear;
+    }
+
+    public void setmYear(int mYear) {
+        this.mYear = mYear;
+    }
+
     public int getmPosition() {
         return mPosition;
     }
 
     public void setmPosition(int mPosition) {
         this.mPosition = mPosition;
-    }
-
-    @Override
-    public String toString() {
-        return "Timetable{" +
-                "mTimeTableID=" + mTimeTableID +
-                ", mLessonName='" + mLessonName + '\'' +
-                ", mWeek=" + mWeek +
-                ", mPosition=" + mPosition +
-                '}';
     }
 }

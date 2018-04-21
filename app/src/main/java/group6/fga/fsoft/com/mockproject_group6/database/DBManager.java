@@ -35,6 +35,7 @@ public class DBManager extends SQLiteOpenHelper {
                 + Contract.TIME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Contract.TIME_WEEK + " INTEGER NOT NULL, "
                 + Contract.TIME_LESSON + " TEXT NOT NULL, "
+                + Contract.TIME_YEAR + " INTEGER NOT NULL, "
                 + Contract.TIME_POSITION + " INTEGER NOT NULL " + ")";
         sqLiteDatabase.execSQL(CREATE_TIMETABLE);
     }
