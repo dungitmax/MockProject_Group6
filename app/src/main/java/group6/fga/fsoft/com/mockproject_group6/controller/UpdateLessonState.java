@@ -12,7 +12,7 @@ public class UpdateLessonState extends BaseState {
 
     @Override
     public void handleMsg(Message msg) {
-        Log.e("state",TAG);
+        Log.e("state", TAG);
 
     }
 }

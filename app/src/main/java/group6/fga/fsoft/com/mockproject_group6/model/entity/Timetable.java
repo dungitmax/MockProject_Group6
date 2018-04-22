@@ -22,6 +22,11 @@ public class Timetable {
         this.mPosition = mPosition;
     }
 
+    public Timetable(String mLessonName, int mWeek) {
+        this.mLessonName = mLessonName;
+        this.mWeek = mWeek;
+    }
+
     public int getmTimeTableID() {
         return mTimeTableID;
     }
